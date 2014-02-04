@@ -1,0 +1,25 @@
+{
+  "name": "angular-responsive",
+  "version": "0.1.0",
+  "description": "A set of AngularJS Directives to support responsive web design",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lavinjj/angular-responsive.git"
+  },
+  "keywords": [
+    "AngularJS",
+    "Directive",
+    "Responsive",
+    "Mobile"
+  ],
+  "author": "Jim Lavin",
+  "license": "Apache-2",
+  "bugs": {
+    "url": "https://github.com/lavinjj/angular-responsive/issues"
+  },
+  "homepage": "https://github.com/lavinjj/angular-responsive"
+}

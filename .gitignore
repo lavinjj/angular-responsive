@@ -152,3 +152,8 @@ $RECYCLE.BIN/
 
 # WebStorm crap
 .idea
+
+# bower files
+bower_components/
+# node files
+node_modules/
