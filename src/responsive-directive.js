@@ -66,6 +66,7 @@
 
             return device;
         }])
+
         .directive('arTablet', ['responsiveHelper', function (responsiveHelper) {
             var device = {
                 restrict: "EAC",
@@ -93,6 +94,7 @@
 
             return device;
         }])
+
         .directive('arDesktop', ['responsiveHelper', function (responsiveHelper) {
             var device = {
                 restrict: "EAC",
@@ -120,6 +122,7 @@
 
             return device;
         }])
+
         .directive('arResponsive', ['responsiveHelper', function (responsiveHelper) {
             var device = {
                 restrict: "EAC",
@@ -127,7 +130,7 @@
                 template: '<div></div>',
                 compile: function (element, attr, transclude) {
                     return function postLink(scope, element, attr) {
-                        var deviceTypes = attr['arResponsive'];
+                        var deviceTypes = angular.fromJson(attr['arResponsive']);
                         var childElement, childScope;
 
                         scope.$watch(attr['arResponsive'], function (newValue) {
@@ -165,5 +168,5 @@
             return device;
         }
         ])
-})
-    ();
+
+})();
