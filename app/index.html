@@ -15,21 +15,26 @@
 <div class="container-fluid" ng-controller="myController">
     <div class="row-fluid">
         <h2>Responsive Directive Example</h2>
-        <div ar-mobile>
+
+        <div data-ar-mobile>
             Only shown on mobile devices {{ email }}
-            <img ng-src="http://betanews.com/wp-content/uploads/2012/02/businessready.jpg" alt="mobile" width="50" height="50"/>
+            <img ng-src="http://betanews.com/wp-content/uploads/2012/02/businessready.jpg" src="" alt="mobile"
+                 width="50" height="50"/>
         </div>
-        <div ar-tablet>
+        <div data-ar-tablet>
             Only shown on tablet devices {{ email }}
-            <img ng-src="http://www1.pcmag.com/media/images/320913-tablet-satisfaction.jpg" alt="tablets" width="50" height="50"/>
+            <img ng-src="http://www1.pcmag.com/media/images/320913-tablet-satisfaction.jpg" src="" alt="tablets"
+                 width="50" height="50"/>
         </div>
-        <div ar-desktop>
+        <div data-ar-desktop>
             Only shown on desktop devices {{ email }}
-            <img ng-src="http://cdn.arstechnica.net/wp-content/uploads/2012/08/Acer-Aspire-A5560-7414.png" alt="desktop" width="50" height="50"/>
+            <img ng-src="http://cdn.arstechnica.net/wp-content/uploads/2012/08/Acer-Aspire-A5560-7414.png" src=""
+                 alt="desktop" width="50" height="50"/>
         </div>
-        <div ar-responsive="{ 'Mobile': true, 'Tablet': true, 'Desktop': false }">
+        <div data-ar-responsive="{ 'Mobile': true, 'Tablet': true, 'Desktop': false }">
             Only shown on mobile or tablet devices {{ email }}
-            <img ng-src="http://mygooseworks.com/home/images/stories/mobiledevices.jpg" alt="tablets and mobile" width="50" height="50"/>
+            <img ng-src="http://mygooseworks.com/home/images/stories/mobiledevices.jpg" src="" alt="tablets and mobile"
+                 width="50" height="50"/>
         </div>
     </div>
 </div>
