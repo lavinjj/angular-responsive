@@ -3,7 +3,7 @@
 
     angular.module('angular-responsive', [])
 
-        .directive('arDevice', ['$window', '$animate', function ($window, $animate) {
+        .directive('arMobile', ['$window', '$animate', function ($window, $animate) {
             var device = {
                 restrict: "EAC",
                 transclude: 'element',
@@ -12,50 +12,187 @@
                     // Adapted from http://www.detectmobilebrowsers.com
                     var ua = $window.navigator.userAgent || $window.navigator.vendor || $window.opera;
 
+                    var width = $window.outerWidth;
+
                     // Checks for iOs, Android, Blackberry, Opera Mini, and Windows mobile devices
-                    return (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
+                    var smartDevice = (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
+
+                    return smartDevice && width <= 767;
                 },
-                link: function ($scope, $element, $attr, ctrl, $transclude) {
-                    var block, childScope = null;
-                    var showElement = false;
-                    if(device.isMobile() && $attr.arDevice === "Mobile"){
-                        showElement = true;
+                compile: function (element, attr, transclude) {
+                    return function postLink(scope, element, attr) {
+                        var childElement, childScope;
+                        scope.$watch(attr['arDevice'], function (newValue) {
+                            if (childElement) {
+                                childElement.remove();
+                                childScope.$destroy();
+                                childElement = undefined;
+                                childScope = undefined;
+                            }
+                            if (device.isMobile()) {
+                                childScope = scope.$new();
+                                childElement = transclude(childScope, function (clone) {
+                                    element.after(clone);
+                                });
+                            }
+                        });
                     }
-                    if(!device.isMobile() && $attr.arDevice === "Desktop") {
-                        showElement = true;
-                    }
-
-                    if (showElement) {
-                        if (!childScope) {
-                            childScope = $scope.$new();
-                            $transclude(childScope, function (clone) {
-                                clone[clone.length++] = document.createComment(' end arDevice: ' + $attr.arDevice + ' ');
-                                // Note: We only need the first/last node of the cloned nodes.
-                                // However, we need to keep the reference to the jqlite wrapper as it might be changed later
-                                // by a directive with templateUrl when it's template arrives.
-                                block = {
-                                    clone: clone
-                                };
-                                $animate.enter(clone, $element.parent(), $element);
-                            });
-                        }
-                    } else {
-
-                        if (childScope) {
-                            childScope.$destroy();
-                            childScope = null;
-                        }
-
-                        if (block) {
-                            $animate.leave(angular.getBlockElements(block.clone));
-                            block = null;
-                        }
-                    }
-                }
-
-            };
+                }};
 
             return device;
-        }]);
+        }])
+        .directive('arTablet', ['$window', '$animate', function ($window, $animate) {
+            var device = {
+                restrict: "EAC",
+                transclude: 'element',
+                template: '<div></div>',
+                isTablet: function () {
+                    // Adapted from http://www.detectmobilebrowsers.com
+                    var ua = $window.navigator.userAgent || $window.navigator.vendor || $window.opera;
+
+                    var width = $window.outerWidth;
+
+                    // Checks for iOs, Android, Blackberry, Opera Mini, and Windows mobile devices
+                    var smartDevice = (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
+
+                    return smartDevice && width >= 768;
+                },
+                compile: function (element, attr, transclude) {
+                    return function postLink(scope, element, attr) {
+                        var childElement, childScope;
+                        scope.$watch(attr['arDevice'], function (newValue) {
+                            if (childElement) {
+                                childElement.remove();
+                                childScope.$destroy();
+                                childElement = undefined;
+                                childScope = undefined;
+                            }
+                            if (device.isTablet()) {
+                                childScope = scope.$new();
+                                childElement = transclude(childScope, function (clone) {
+                                    element.after(clone);
+                                });
+                            }
+                        });
+                    }
+                }};
+
+            return device;
+        }])
+        .directive('arDesktop', ['$window', '$animate', function ($window, $animate) {
+            var device = {
+                restrict: "EAC",
+                transclude: 'element',
+                template: '<div></div>',
+                isDesktop: function () {
+                    // Adapted from http://www.detectmobilebrowsers.com
+                    var ua = $window.navigator.userAgent || $window.navigator.vendor || $window.opera;
+
+                    // Checks for iOs, Android, Blackberry, Opera Mini, and Windows mobile devices
+                    return !(/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
+                },
+                compile: function (element, attr, transclude) {
+                    return function postLink(scope, element, attr) {
+                        var childElement, childScope;
+                        scope.$watch(attr['arDevice'], function (newValue) {
+                            if (childElement) {
+                                childElement.remove();
+                                childScope.$destroy();
+                                childElement = undefined;
+                                childScope = undefined;
+                            }
+                            if (device.isDesktop()) {
+                                childScope = scope.$new();
+                                childElement = transclude(childScope, function (clone) {
+                                    element.after(clone);
+                                });
+                            }
+                        });
+                    }
+                }};
+
+            return device;
+        }])
+        .directive('arResponsive', ['$window', '$animate', function ($window, $animate) {
+            var device = {
+                restrict: "EAC",
+                transclude: 'element',
+                template: '<div></div>',
+                isMobile: function () {
+                    // Adapted from http://www.detectmobilebrowsers.com
+                    var ua = $window.navigator.userAgent || $window.navigator.vendor || $window.opera;
+
+                    var width = $window.outerWidth;
+
+                    // Checks for iOs, Android, Blackberry, Opera Mini, and Windows mobile devices
+                    var smartDevice = (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
+
+                    return smartDevice && width <= 767;
+                },
+                isTablet: function () {
+                    // Adapted from http://www.detectmobilebrowsers.com
+                    var ua = $window.navigator.userAgent || $window.navigator.vendor || $window.opera;
+
+                    var width = $window.outerWidth;
+
+                    // Checks for iOs, Android, Blackberry, Opera Mini, and Windows mobile devices
+                    var smartDevice = (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
+
+                    return smartDevice && width >= 768;
+                },
+                isDesktop: function () {
+                    // Adapted from http://www.detectmobilebrowsers.com
+                    var ua = $window.navigator.userAgent || $window.navigator.vendor || $window.opera;
+
+                    // Checks for iOs, Android, Blackberry, Opera Mini, and Windows mobile devices
+                    return !(/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
+                },
+                compile: function (element, attr, transclude) {
+                    return function postLink(scope, element, attr) {
+                        var childElement, childScope;
+                        var deviceTypes = attr['arResponsive'].split(',');
+                        scope.$watch(attr['arDevice'], function (newValue) {
+                            if (childElement) {
+                                childElement.remove();
+                                childScope.$destroy();
+                                childElement = undefined;
+                                childScope = undefined;
+                            }
+
+                            var showElement = false;
+
+                            angular.forEach(deviceTypes, function(display){
+                               switch(display.trim().toLowerCase()){
+                                   case "mobile":
+                                       if(!showElement){
+                                           showElement = device.isMobile();
+                                       }
+                                       break;
+                                   case "tablet":
+                                       if(!showElement){
+                                           showElement = device.isTablet();
+                                       }
+                                       break;
+                                   case "desktop":
+                                       if(!showElement){
+                                           showElement = device.isDesktop();
+                                       }
+                                       break;
+                               }
+                            });
+
+                            if (showElement) {
+                                childScope = scope.$new();
+                                childElement = transclude(childScope, function (clone) {
+                                    element.after(clone);
+                                });
+                            }
+                        });
+                    }
+                }};
+
+            return device;
+        }])
+
 
 })();
