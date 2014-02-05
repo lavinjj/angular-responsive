@@ -22,13 +22,13 @@ There are four different directives:
 
 ## How to use angular-responsive
 
-First you need to include the responsive-directive.js file in your project and then you need to add a dependency to your AngularJS App module.
+First, you need to include the responsive-directive.js file in your project and then you need to add a dependency to your AngularJS App module.
 
 ````javascript
 angular.module('myApp', ['angular-responsive']);
 `````
 
-Second you use apply the appropriate directive to a div or span surrounding the content you want to display conditionally.
+Second, you apply the appropriate directive to a div or span surrounding the content you want to display conditionally.
 
 ````javascript
         <div data-ar-mobile>
@@ -53,8 +53,9 @@ Second you use apply the appropriate directive to a div or span surrounding the 
         </div>
 ````
 
-Notice on the responsive directive we pass in a Json object to the directive that indicates on which device type the content should be displayed.
+To display content on more than one type of device you can use the responsive directive and pass in a Json object, that indicates on which device type the content should be displayed.
 
+Notice: To delay loading of images until the content is actually displayed, you must use ng-src for image tags. This is due to the fact that browsers will start evaluating HTML before AngularJS gets bootstrapped and the browsers will download the images. Using the ng-src directive delays this until after AngularJS has had a chance to evaluate the HTML.
 
 
 
