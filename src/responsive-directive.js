@@ -130,10 +130,10 @@
                 template: '<div></div>',
                 compile: function (element, attr, transclude) {
                     return function postLink(scope, element, attr) {
-                        var deviceTypes = angular.fromJson(attr['arResponsive']);
+                        var deviceTypes = scope.$eval(attr['arResponsive']);
                         var childElement, childScope;
 
-                        scope.$watch(attr['arResponsive'], function (newValue) {
+                        scope.$watch(deviceTypes, function (newValue) {
                                 if (childElement) {
                                     childElement.remove();
                                     childScope.$destroy();
