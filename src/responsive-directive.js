@@ -4,7 +4,10 @@
     angular.module('angular-responsive', [])
         // localization service responsible for retrieving resource files from the server and
         // managing the translation dictionary
-        .factory('responsiveHelper', ['$window', function ($window) {
+        .provider('responsiveHelper', [function () {
+            var injector = angular.injector(['ng']);
+            var $window = injector.get('$window');
+
             var helper = {
 
                 isSmartDevice: function () {
@@ -36,7 +39,9 @@
                 }
             };
 
-            return helper;
+            this.$get = function() {
+                return helper;
+            };
         } ])
 
         .directive('arMobile', ['responsiveHelper', function (responsiveHelper) {

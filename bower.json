@@ -20,6 +20,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "latest"
+    "angular": "latest",
+    "angular-route": "~1.2.13"
   }
 }
