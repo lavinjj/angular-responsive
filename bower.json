@@ -20,6 +20,6 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "latest"
+    "angular": "~1.2.14"
   }
 }
