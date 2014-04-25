@@ -154,7 +154,11 @@ $RECYCLE.BIN/
 .idea
 
 # bower files
-bower_components/
-!bower_components/angular-responsive/
+bower_components/angular/*
+bower_components/angular-route/*
 # node files
 node_modules/
+
+/samples/bower_components/angular/
+
+/samples/bower_components/angular-route/
