@@ -155,5 +155,6 @@ $RECYCLE.BIN/
 
 # bower files
 bower_components/
+!bower_components/angular-responsive/
 # node files
 node_modules/
