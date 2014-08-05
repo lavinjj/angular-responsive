@@ -5,27 +5,20 @@
   "authors": [
     "Jim Lavin"
   ],
-  "description": "A set of AngularJS Directives for Responsive Web Design",
+  "description": "angularjs responsive directives",
   "keywords": [
-    "AngularJS",
-    "Directive",
-    "Responsive",
-    "Mobile"
+    "angularjs",
+    "responsive"
   ],
   "license": "Apache-2",
   "ignore": [
-    ".gitignore",
-    "package.json",
-    "app",
-    "app2",
     "node_modules",
     "bower_components",
-    "scripts",
-    "test",
-    "tests"
+    "samples",
+    ".gitignore",
+    "package.json"
   ],
   "dependencies": {
-    "angular": "~1.2.13",
     "angular-route": "~1.2.13"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "angular-responsive",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "A set of AngularJS Directives to support responsive web design",
   "main": "index.js",
   "scripts": {
