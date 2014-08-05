@@ -2,7 +2,7 @@
   "name": "angular-responsive",
   "version": "0.3.0",
   "homepage": "https://github.com/lavinjj/angular-responsive",
-  "main": "src/responsive.js",
+  "main": "src/responsive-directive.js",
   "authors": [
     "Jim Lavin"
   ],
