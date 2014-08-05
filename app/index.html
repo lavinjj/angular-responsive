@@ -31,7 +31,7 @@
             <img ng-src="http://cdn.arstechnica.net/wp-content/uploads/2012/08/Acer-Aspire-A5560-7414.png" src=""
                  alt="desktop" width="50" height="50"/>
         </div>
-        <div data-ar-responsive="{ 'Mobile': true, 'Tablet': true, 'Desktop': false }">
+        <div ng-if="isMobile">
             Only shown on mobile or tablet devices {{ email }}
             <img ng-src="http://mygooseworks.com/home/images/stories/mobiledevices.jpg" src="" alt="tablets and mobile"
                  width="50" height="50"/>

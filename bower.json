@@ -14,13 +14,18 @@
   ],
   "license": "Apache-2",
   "ignore": [
+    ".gitignore",
+    "package.json",
+    "app",
+    "app2",
     "node_modules",
     "bower_components",
+    "scripts",
     "test",
     "tests"
   ],
   "dependencies": {
-    "angular": "latest",
+    "angular": "~1.2.13",
     "angular-route": "~1.2.13"
   }
 }
