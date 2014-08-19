@@ -8,7 +8,9 @@
             // Gather winWidth based in Twitter BootStrap http://getbootstrap.com/css/#grid-media-queries
 
             var $window  = $windowProvider.$get();
-            var winWidth = $window.outerWidth;
+            // is better get first the innerWitdh that will not include a lateral panel
+            // like the console inspector, bookmarks, etc
+            var winWidth = $window.innerWidth || $window.outerWidth;
             var helper   = {
 
                 //isSmartDevice : isSmartDevice( $window ),
