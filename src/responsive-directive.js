@@ -35,7 +35,7 @@
                 restrict    : "EAC",
                 transclude  : 'element',
                 template    : '<div></div>',
-                compile     : buildCompileFn( 'arXs', responsiveHelper.arXs )
+                compile     : buildCompileFn( 'arXs', responsiveHelper.isXs )
             };
         }])
 
@@ -48,7 +48,7 @@
                 restrict    : "EAC",
                 transclude  : 'element',
                 template    : '<div></div>',
-                compile     : buildCompileFn( 'arSm', responsiveHelper.arSm )
+                compile     : buildCompileFn( 'arSm', responsiveHelper.isSm )
             };
         }])
 
@@ -61,7 +61,7 @@
                 restrict    : "EAC",
                 transclude  : 'element',
                 template    : '<div></div>',
-                compile     : buildCompileFn( 'arMd', responsiveHelper.arMd )
+                compile     : buildCompileFn( 'arMd', responsiveHelper.isMd )
             };
         }])
 
@@ -74,7 +74,7 @@
                 restrict    : "EAC",
                 transclude  : 'element',
                 template    : '<div></div>',
-                compile     : buildCompileFn( 'arLg', responsiveHelper.arLg )
+                compile     : buildCompileFn( 'arLg', responsiveHelper.isLg )
             };
         }])
 
