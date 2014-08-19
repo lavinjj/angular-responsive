@@ -5,16 +5,17 @@
         .module('angular-responsive', [])
         .provider('responsiveHelper', ["$windowProvider", function ($windowProvider)
         {
-            // Gather winWidth and smartDevice information only 1x at app startup...
+            // Gather winWidth based in Twitter BootStrap http://getbootstrap.com/css/#grid-media-queries
 
             var $window  = $windowProvider.$get();
-            var winWidth = $window['outerWidth'];
+            var winWidth = $window.outerWidth;
             var helper   = {
 
-                isSmartDevice : isSmartDevice( $window ),
-                isMobile      : function () { return helper.isSmartDevice && (winWidth <= 767);   },
-                isTablet      : function () { return helper.isSmartDevice && (winWidth > 767);    },
-                isDesktop     : function () { return !helper.isSmartDevice;                       }
+                //isSmartDevice : isSmartDevice( $window ),
+                isXs: function () { return winWidth < 768; },
+                isSm: function () { return winWidth >= 768 && winWidth < 992; },
+                isMd: function () { return winWidth >= 992 && winWidth < 1200; },
+                isLg: function () { return winWidth >= 1200; }
 
             };
 
@@ -26,46 +27,59 @@
         }])
 
         /**
-         * Is this a limited-display-size mobile device
+         * Extra small devices Phones (<768px)
          */
-        .directive('arMobile', ['responsiveHelper', function (responsiveHelper)
+        .directive('arXs', ['responsiveHelper', function (responsiveHelper)
         {
             return {
                 restrict    : "EAC",
                 transclude  : 'element',
                 template    : '<div></div>',
-                compile     : buildCompileFn( 'arMobile', responsiveHelper.isMobile )
+                compile     : buildCompileFn( 'arXs', responsiveHelper.arXs )
             };
         }])
 
         /**
-         * Is this a table device
+         * Small devices Tablets (≥768px)
          */
-        .directive('arTablet', ['responsiveHelper', function (responsiveHelper)
+        .directive('arSm', ['responsiveHelper', function (responsiveHelper)
         {
             return {
                 restrict    : "EAC",
                 transclude  : 'element',
                 template    : '<div></div>',
-                compile     : buildCompileFn( 'arTablet', responsiveHelper.isTablet )
+                compile     : buildCompileFn( 'arSm', responsiveHelper.arSm )
             };
         }])
 
         /**
-         * Is this a desktop device
+         * Medium devices Desktops (≥992px)
          */
-        .directive('arDesktop', ['responsiveHelper', function (responsiveHelper)
+        .directive('arMd', ['responsiveHelper', function (responsiveHelper)
         {
             return {
                 restrict    : "EAC",
                 transclude  : 'element',
                 template    : '<div></div>',
-                compile     : buildCompileFn( 'arDesktop', responsiveHelper.isDesktop )
+                compile     : buildCompileFn( 'arMd', responsiveHelper.arMd )
             };
         }])
 
         /**
-         * Does the device a match user-specified combination (0..3) of device types
+         * Large devices Desktops (≥1200px)
+         */
+        .directive('arLg', ['responsiveHelper', function (responsiveHelper)
+        {
+            return {
+                restrict    : "EAC",
+                transclude  : 'element',
+                template    : '<div></div>',
+                compile     : buildCompileFn( 'arLg', responsiveHelper.arLg )
+            };
+        }])
+
+        /**
+         * Does the with a match user-specified combination (0..4)
          */
         .directive('arResponsive', ['responsiveHelper', function (responsiveHelper)
         {
@@ -124,9 +138,10 @@
     {
         return function( deviceTypes )
         {
-            return  ( deviceTypes['Mobile']  && responsiveHelper.isMobile()  ) ||
-                ( deviceTypes['Tablet']  && responsiveHelper.isTablet()  ) ||
-                ( deviceTypes['Desktop'] && responsiveHelper.isDesktop() ) || false;
+            return  ( deviceTypes['xs']  && responsiveHelper.isXs()  ) ||
+                ( deviceTypes['sm']  && responsiveHelper.isSm()  ) ||
+                ( deviceTypes['md']  && responsiveHelper.isMd()  ) ||
+                ( deviceTypes['lg'] && responsiveHelper.isLg() ) || false;
         };
     }
 
@@ -135,6 +150,7 @@
      * @param $window
      * @returns {boolean}
      */
+    /*
     function isSmartDevice( $window )
     {
         // Adapted from http://www.detectmobilebrowsers.com
@@ -143,5 +159,6 @@
         // Checks for iOs, Android, Blackberry, Opera Mini, and Windows mobile devices
         return (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
     }
+    */
 
 })( window.angular );
