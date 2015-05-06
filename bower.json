@@ -20,6 +20,6 @@
     "package.json"
   ],
   "dependencies": {
-    "angular-route": "~1.2.13"
+    "angular": ">1.2.0"
   }
 }
